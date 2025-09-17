@@ -1,0 +1,8 @@
+cp_model                nflfastR Completion Probability Model
+ep_model                nflfastR Expected Points Model
+fg_model                nflfastR Field Goal Model
+wp_model                nflfastR Win Probability Model
+wp_model_spread         nflfastR Win Probability Model (including
+                        Spread)
+xpass_model             nflfastR Expected Pass Model
+xyac_model              nflfastR Expected Yards after Catch Model

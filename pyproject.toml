@@ -1,0 +1,10 @@
+[project]
+name = "nfl-playground"
+version = "0.1.0"
+description = "NFL data analysis playground"
+requires-python = ">=3.10"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
