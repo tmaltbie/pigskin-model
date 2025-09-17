@@ -24,6 +24,70 @@
 
 ---
 
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **R** (version 4.0+)
+- **RStudio** (recommended)
+- **The Odds API Key** (free tier: 500 requests/month)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone git@github.com:tmaltbie/pigskin-model.git
+   cd pigskin-model
+   ```
+
+2. **Install R dependencies**
+   ```r
+   # The renv package manager will automatically install required packages
+   renv::restore()
+   ```
+
+3. **Set up API key**
+   ```r
+   # Add your The Odds API key to odds_api.R
+   # Replace: API_KEY <- "your-api-key-here"
+   ```
+
+### Quick Start
+
+**Generate Week 3 2025 Predictions:**
+```r
+# Load the complete prediction system
+source('complete_week3_enhanced.R')
+
+# Generate all predictions
+predictions <- generate_complete_week3_predictions()
+
+# View win probabilities
+source('week3_probabilities.R')
+probabilities <- generate_week3_probabilities()
+
+# Get betting recommendations with EV analysis
+source('week3_betting_chart.R')
+create_week3_betting_chart()
+```
+
+**Test the EPA System:**
+```r
+# Load and test EPA prediction system
+source('epa_prediction_system.R')
+test_epa_system()
+```
+
+### Key Dependencies
+
+- `nflreadr` - NFL data access
+- `dplyr` - Data manipulation  
+- `httr` - API requests
+- `jsonlite` - JSON parsing
+- `renv` - Package management
+
+---
+
 ## References & Data Sources
 
 ### 📊 Primary Data Sources
