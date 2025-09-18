@@ -1,0 +1,29 @@
+compute_conference_seeds
+                        Compute NFL Playoff Seedings using Game Results
+                        and Divisional Rankings
+compute_division_ranks
+                        Compute NFL Division Rankings using Game
+                        Results
+compute_draft_order     Compute NFL Draft Order using Game Results and
+                        Divisional Rankings
+dictionary_game_summary
+                        Data Dictionary: Simulations | Game Summary
+dictionary_games        Data Dictionary: Simulations | Games
+dictionary_overall      Data Dictionary: Simulations | Overall
+dictionary_standings    Data Dictionary: Simulations | Standings
+dictionary_team_wins    Data Dictionary: Simulations | Team Wins
+divisions               NFL team names and the conferences and
+                        divisions they belong to
+fmt_pct_special         Format Numerical Values to Special Percentage
+                        Strings
+nfl_simulations         Simulate an NFL Season
+nfl_standings           Compute NFL Standings
+nfl_standings_prettify
+                        Compute Pretty NFL Standings Table
+sims_games_example      Example Games Data used in NFL Simulations
+sims_teams_example      Example Teams Data used in NFL Simulations
+simulate_nfl            Simulate an NFL Season
+simulations_verify_fct
+                        Verify Custom NFL Result Simulation Function
+summary.nflseedR_simulation
+                        Compute Pretty Simulations Summary Table

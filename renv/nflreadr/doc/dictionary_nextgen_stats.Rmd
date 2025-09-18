@@ -1,0 +1,20 @@
+---
+title: "Data Dictionary - Next Gen Stats"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data Dictionary - Next Gen Stats}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = FALSE,
+  comment = "#>"
+)
+```
+
+```{r}
+knitr::kable(nflreadr::dictionary_nextgen_stats)
+```

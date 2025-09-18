@@ -398,31 +398,25 @@ process_completed_games_csv <- function(season = 2025, week = NULL) {
   
   cat("🔄 Processing completed games for learning...\n")
   
-  # Load actual game results
-  games_file <- "/Users/trevor/Git/playground/nfldata/data/games.csv"
-  
-  if (!file.exists(games_file)) {
-    cat("❌ Games data file not found:", games_file, "\n")
-    return(0)
-  }
-  
+  # Load actual game results using unified data access
   tryCatch({
     
-    # Load games data
-    games <- read.csv(games_file, stringsAsFactors = FALSE)
+    # Use unified data access system instead of hard-coded path
+    source('learning_system/unified_data_access.R')
+    completed_games <- load_actual_game_results(seasons = season, completed_only = TRUE)
     
-    # Filter to season and completed games
-    season_games <- games[games$season == season,]
-    if (!is.null(week)) {
-      season_games <- season_games[season_games$week == week,]
+    if (is.null(completed_games) || nrow(completed_games) == 0) {
+      cat("❌ No completed games found for season", season, "\n")
+      return(0)
     }
     
-    completed_games <- season_games[complete.cases(season_games$home_score, season_games$away_score),]
-    
-    if (nrow(completed_games) == 0) {
-      cat("⚠️  No completed games found for season", season, 
-          if(!is.null(week)) paste(", week", week) else "", "\n")
-      return(0)
+    # Filter to specific week if requested
+    if (!is.null(week)) {
+      completed_games <- completed_games[completed_games$week == week,]
+      if (nrow(completed_games) == 0) {
+        cat("⚠️  No completed games found for season", season, "week", week, "\n")
+        return(0)
+      }
     }
     
     cat(sprintf("📊 Found %d completed games\n", nrow(completed_games)))

@@ -1,0 +1,23 @@
+---
+title: "Data Dictionary - Depth Charts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data Dictionary - Depth Charts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Please note that the data source has changed after the 2024 season. From 2025 onwards, the following variables and descriptions will apply.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = FALSE,
+  comment = "#>"
+)
+```
+
+```{r }
+knitr::kable(nflreadr::dictionary_depth_charts)
+```
+

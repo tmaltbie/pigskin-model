@@ -3,8 +3,27 @@
 # Prioritizes actual game results and real 2025 data
 
 library(dplyr)
-library(nflreadr)
 library(lubridate)
+
+# Try to load nflverse packages if available
+nflfastR_available <- FALSE
+nflreadr_available <- FALSE
+
+tryCatch({
+  library(nflfastR)
+  nflfastR_available <- TRUE
+  cat("✅ nflfastR loaded\n")
+}, error = function(e) {
+  cat("⚠️ nflfastR not available\n")
+})
+
+tryCatch({
+  library(nflreadr) 
+  nflreadr_available <- TRUE
+  cat("✅ nflreadr loaded\n")
+}, error = function(e) {
+  cat("⚠️ nflreadr not available\n")
+})
 
 # Global data cache for performance
 .unified_data_cache <- new.env()
@@ -39,7 +58,23 @@ load_actual_game_results <- function(seasons = 2020:2025, completed_only = TRUE,
   # Try multiple sources for game results
   games_data <- NULL
   
-  # Source 1: nfldata repository (most reliable for completed games)
+  
+  # Source 1: nflfastR/nflreadr (preferred if available)
+  if (nflreadr_available) {
+    cat("📊 Loading from nflreadr...\n")
+    tryCatch({
+      games_data <- nflreadr::load_schedules(seasons = seasons)
+      if (!is.null(games_data) && nrow(games_data) > 0) {
+        cat("✅ nflreadr: Loaded", nrow(games_data), "total games\n")
+      }
+    }, error = function(e) {
+      cat("❌ nflreadr error:", e$message, "\n")
+      games_data <- NULL
+    })
+  }
+  
+  # Source 2: nfldata repository (fallback)
+  if (is.null(games_data)) {
   nfldata_path <- "/Users/trevor/Git/playground/nfldata/data/games.csv"
   if (file.exists(nfldata_path)) {
     cat("📊 Loading from nfldata repository...\n")
@@ -372,15 +407,154 @@ clear_data_cache <- function() {
   cat("🗑️  Data cache cleared\n")
 }
 
-cat("Unified NFL Data Access System loaded! 🏈\n\n")
+
+#' Load comprehensive play-by-play data using nflfastR
+#' 
+#' Enhanced data loading with nflfastR for detailed situational analysis
+#' 
+#' @param seasons Vector of seasons to load
+#' @param include_epa Include EPA calculations (default: TRUE)
+#' @param include_wp Include win probability (default: TRUE)
+#' @param cache Use cached data (default: TRUE)
+#' @return Enhanced play-by-play data frame
+load_enhanced_pbp_data <- function(seasons = 2024:2025, include_epa = TRUE, include_wp = TRUE, cache = TRUE) {
+  
+  cache_key <- paste("enhanced_pbp", paste(seasons, collapse="-"), include_epa, include_wp, sep="_")
+  
+  if (cache && exists(cache_key, envir = .unified_data_cache)) {
+    cat("📋 Loading cached enhanced PBP data...\n")
+    return(get(cache_key, envir = .unified_data_cache))
+  }
+  
+  if (!nflfastR_available) {
+    cat("⚠️ nflfastR not available, using fallback data...\n")
+    return(load_comprehensive_pbp(seasons = seasons))
+  }
+  
+  cat("🏈 Loading enhanced play-by-play data with nflfastR...\n")
+  
+  tryCatch({
+    # Load play-by-play data with full nflfastR enhancements
+    pbp_data <- nflfastR::load_pbp(seasons = seasons)
+    
+    if (!is.null(pbp_data) && nrow(pbp_data) > 0) {
+      cat("✅ nflfastR: Loaded", nrow(pbp_data), "plays\n")
+      cat("📊 Enhanced columns available:", length(colnames(pbp_data)), "\n")
+      
+      # Cache the result
+      if (cache) {
+        assign(cache_key, pbp_data, envir = .unified_data_cache)
+      }
+      
+      return(pbp_data)
+    } else {
+      cat("⚠️ No play-by-play data available\n")
+      return(NULL)
+    }
+    
+  }, error = function(e) {
+    cat("❌ nflfastR PBP loading failed:", e$message, "\n")
+    cat("🔄 Falling back to existing system...\n")
+    return(load_comprehensive_pbp(seasons = seasons))
+  })
+}
+
+#' Get enhanced team statistics using nflfastR data
+#' 
+#' @param seasons Seasons to analyze
+#' @param teams Vector of team abbreviations (optional)
+#' @return Enhanced team statistics with EPA metrics
+get_enhanced_team_stats <- function(seasons = 2024:2025, teams = NULL) {
+  
+  if (!nflfastR_available) {
+    cat("⚠️ nflfastR not available for enhanced stats\n")
+    return(NULL)
+  }
+  
+  cat("📊 Calculating enhanced team statistics...\n")
+  
+  tryCatch({
+    pbp_data <- load_enhanced_pbp_data(seasons = seasons)
+    
+    if (is.null(pbp_data)) {
+      return(NULL)
+    }
+    
+    # Filter to specified teams if provided
+    if (!is.null(teams)) {
+      pbp_data <- pbp_data %>%
+        filter(posteam %in% teams | defteam %in% teams)
+    }
+    
+    # Calculate comprehensive team stats
+    team_stats <- pbp_data %>%
+      filter(!is.na(epa), !is.na(posteam), play_type %in% c("pass", "run")) %>%
+      group_by(posteam) %>%
+      summarise(
+        # Basic stats
+        plays = n(),
+        
+        # EPA metrics
+        epa_per_play = mean(epa, na.rm = TRUE),
+        epa_per_pass = mean(epa[play_type == "pass"], na.rm = TRUE),
+        epa_per_rush = mean(epa[play_type == "run"], na.rm = TRUE),
+        
+        # Success rates
+        success_rate = mean(success, na.rm = TRUE),
+        pass_success_rate = mean(success[play_type == "pass"], na.rm = TRUE),
+        rush_success_rate = mean(success[play_type == "run"], na.rm = TRUE),
+        
+        # Situational metrics
+        first_down_pass_rate = mean(play_type == "pass"[down == 1], na.rm = TRUE),
+        third_down_conversion_rate = mean(first_down[down == 3], na.rm = TRUE),
+        red_zone_success_rate = mean(success[yardline_100 <= 20], na.rm = TRUE),
+        
+        # Advanced metrics (if available)
+        qb_epa = mean(epa[play_type == "pass"], na.rm = TRUE),
+        explosive_play_rate = mean((play_type == "pass" & yards_gained >= 20) | 
+                                  (play_type == "run" & yards_gained >= 10), na.rm = TRUE),
+        
+        .groups = 'drop'
+      )
+    
+    # Calculate defensive stats
+    def_stats <- pbp_data %>%
+      filter(!is.na(epa), !is.na(defteam), play_type %in% c("pass", "run")) %>%
+      group_by(defteam) %>%
+      summarise(
+        def_epa_per_play = mean(epa, na.rm = TRUE),
+        def_success_rate_allowed = mean(success, na.rm = TRUE),
+        def_explosive_plays_allowed = mean((play_type == "pass" & yards_gained >= 20) | 
+                                          (play_type == "run" & yards_gained >= 10), na.rm = TRUE),
+        .groups = 'drop'
+      ) %>%
+      rename(posteam = defteam)
+    
+    # Combine offensive and defensive stats
+    enhanced_stats <- team_stats %>%
+      left_join(def_stats, by = "posteam", suffix = c("", "_def"))
+    
+    cat("✅ Enhanced stats calculated for", nrow(enhanced_stats), "teams\n")
+    
+    return(enhanced_stats)
+    
+  }, error = function(e) {
+    cat("❌ Enhanced stats calculation failed:", e$message, "\n")
+    return(NULL)
+  })
+}
 cat("Available functions:\n")
 cat("- load_actual_game_results(): Load verified game results with 2025 data\n")
 cat("- load_comprehensive_pbp(): Load play-by-play data from all sources\n")
 cat("- get_nfl_season_status(): Check current season status and data availability\n")
 cat("- validate_prediction_vs_actual(): Validate predictions against real results\n")
+
 cat("\n🎯 Quick validation example:\n")
 cat("status <- get_nfl_season_status()\n")
 cat("results_2025 <- load_actual_game_results(seasons = 2025)\n")
+if (nflfastR_available) {
+  cat("enhanced_stats <- get_enhanced_team_stats(seasons = 2024, teams = c('LAC', 'KC'))\n")
+}
 
 # Auto-run status check
 cat("\n📊 Current Status:\n")
@@ -394,3 +568,5 @@ tryCatch({
 }, error = function(e) {
   cat("Status check failed:", e$message, "\n")
 })
+
+cat("\n✅ Unified Data Access System loaded successfully!\n")

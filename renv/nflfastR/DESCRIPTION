@@ -1,7 +1,7 @@
 Type: Package
 Package: nflfastR
 Title: Functions to Efficiently Access NFL Play by Play Data
-Version: 5.1.0
+Version: 5.1.0.9003
 Authors@R: 
     c(person(given = "Sebastian",
              family = "Carl",
@@ -33,14 +33,14 @@ Authors@R:
              family = "Edwards",
              role = "ctb",
              email = "edwards1860@gmail.com"))
-Description: A set of functions to access National Football
-    League play-by-play data from <https://www.nfl.com/>.
+Description: A set of functions to access National Football League
+        play-by-play data from <https://www.nfl.com/>.
 License: MIT + file LICENSE
 URL: https://www.nflfastr.com/, https://github.com/nflverse/nflfastR
 BugReports: https://github.com/nflverse/nflfastR/issues
 Depends: R (>= 4.1.0)
 Imports: cli (>= 3.0.0), curl, data.table (>= 1.15.0), dplyr (>=
-        1.0.0), fastrmodels (>= 1.0.1), furrr, future, glue, janitor,
+        1.0.0), fastrmodels (>= 2.0.0), furrr, future, glue, janitor,
         lifecycle, mgcv, nflreadr (>= 1.2.0), progressr (>= 0.6.0),
         rlang (>= 0.4.7), stringr (>= 1.4.0), tibble (>= 3.0), tidyr
         (>= 1.0.0), xgboost (>= 1.1)
@@ -48,10 +48,17 @@ Suggests: DBI, gsisdecoder, nflseedR (>= 2.0.0), purrr (>= 0.3.0),
         rmarkdown, RSQLite, testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
+Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
+Config/pak/sysreqs: make libicu-dev libssl-dev
+Repository: https://nflverse.r-universe.dev
+Date/Publication: 2025-09-16 06:47:52 UTC
+RemoteUrl: https://github.com/nflverse/nflfastR
+RemoteRef: HEAD
+RemoteSha: 02f861320738c3fa3650db002dd2b83e5aa6d021
 NeedsCompilation: no
-Packaged: 2025-05-14 13:33:17 UTC; S.Carl
+Packaged: 2025-09-16 07:30:59 UTC; root
 Author: Sebastian Carl [aut],
   Ben Baldwin [cre, aut],
   Lee Sharpe [ctb],
@@ -61,6 +68,4 @@ Author: Sebastian Carl [aut],
   Tan Ho [ctb],
   John Edwards [ctb]
 Maintainer: Ben Baldwin <bbaldwin206@gmail.com>
-Repository: CRAN
-Date/Publication: 2025-05-14 14:00:02 UTC
-Built: R 4.5.1; ; 2025-09-16 16:55:25 UTC; unix
+Built: R 4.5.1; ; 2025-09-18 16:48:02 UTC; unix

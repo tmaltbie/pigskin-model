@@ -1,0 +1,10 @@
+{
+  "date_analyzed": ["2025-09-18"],
+  "completed_games": [32],
+  "total_plays": [5527],
+  "teams_analyzed": [32],
+  "league_baselines": {
+    "first_down_pass_rate": [0.4862],
+    "red_zone_pass_rate": [0.5167]
+  }
+}

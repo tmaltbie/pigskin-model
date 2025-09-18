@@ -1,0 +1,9 @@
+nfl4th-package	nfl4th-package
+add_2pt_probs	add_2pt_probs
+add_4th_probs	add_4th_probs
+get_4th_plays	get_4th_plays
+load_4th_pbp	load_4th_pbp
+make_2pt_table_data	make_2pt_table_data
+make_table_data	make_table_data
+nfl4th	nfl4th-package
+nfl4th_clear_cache	nfl4th_clear_cache

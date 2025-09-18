@@ -1,0 +1,42 @@
+Package: nfl4th
+Title: Functions to Calculate Optimal Fourth Down Decisions in the
+        National Football League
+Version: 1.0.4.9005
+Authors@R: 
+    c(person(given = "Ben",
+             family = "Baldwin",
+             role = c("aut", "cre", "cph"),
+             email = "bbaldwin206@gmail.com"),
+      person(given = "Sebastian",
+             family = "Carl",
+             role = "ctb",
+             email = "mrcaseb@gmail.com"))
+Description: A set of functions to estimate outcomes of fourth down
+        plays in the National Football League and obtain fourth down
+        plays from <https://www.nfl.com/> and <https://www.espn.com/>.
+License: MIT + file LICENSE
+URL: https://www.nfl4th.com/, https://github.com/nflverse/nfl4th/,
+        https://github.com/nflverse/nfl4th
+BugReports: https://github.com/nflverse/nfl4th/issues
+Depends: R (>= 4.1.0)
+Imports: backports (>= 1.1.6), curl, dplyr, glue, httr, janitor,
+        jsonlite, magrittr, mgcv, nflfastR (>= 4.0.0), nflreadr, purrr,
+        rlang, stringr, tibble, tidyr, tidyselect, xgboost
+Suggests: data.table, future, gt, nflplotR, rmarkdown, tictoc, testthat
+        (>= 2.0.0), withr
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Config/testthat/edition: 2
+Config/pak/sysreqs: make libicu-dev libssl-dev
+Repository: https://nflverse.r-universe.dev
+Date/Publication: 2025-06-05 08:30:26 UTC
+RemoteUrl: https://github.com/nflverse/nfl4th
+RemoteRef: HEAD
+RemoteSha: 7a35027b610e9c6e227267f782a985eeb63c8818
+NeedsCompilation: no
+Packaged: 2025-09-16 07:39:53 UTC; root
+Author: Ben Baldwin [aut, cre, cph],
+  Sebastian Carl [ctb]
+Maintainer: Ben Baldwin <bbaldwin206@gmail.com>
+Built: R 4.5.1; ; 2025-09-18 17:14:55 UTC; unix

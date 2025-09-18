@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="generator" content="r-universe/pandoc">
+      
+      
+      <title>Data Dictionary - FF Rankings</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" data-external="1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" data-external="1">
+      <link rel="stylesheet" href="https://r-universe.dev/static/article-styles.css?nocache=1" data-external="1">
+   </head>
+   <body>
+      <div class="container" id="topcontainer">
+         <script>if (window.self != window.top) try {document.getElementById('topcontainer').className = "container-fluid article-in-iframe"; } catch(e) {}</script>
+
+         <div class="frontmatter">
+         <h1 class="title">Data Dictionary - FF Rankings</h1>
+         </div>
+
+         <table>
+<colgroup>
+<col width="11%" />
+<col width="4%" />
+<col width="83%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">field</th>
+<th align="left">data_type</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">fp_page</td>
+<td align="left">character</td>
+<td align="left">The relative url that the data was scraped from (add
+the prefix <a href="https://www.fantasypros.com/" class="uri">https://www.fantasypros.com/</a> to visit the page)</td>
+</tr>
+<tr class="even">
+<td align="left">page_type</td>
+<td align="left">character</td>
+<td align="left">Two word identifier separated by a dash identifying the
+type of fantasy ranking (best = bestball; dynasty; redraft) and what
+position it applies to</td>
+</tr>
+<tr class="odd">
+<td align="left">ecr_type</td>
+<td align="left">character</td>
+<td align="left">A two letter identifier combining the ranking type (b =
+bestball; d = dynasty; r = redraft) and position type (o = overall; p =
+positional; sf = superflex; rk = rookie)</td>
+</tr>
+<tr class="even">
+<td align="left">player</td>
+<td align="left">character</td>
+<td align="left">Player name</td>
+</tr>
+<tr class="odd">
+<td align="left">id</td>
+<td align="left">character</td>
+<td align="left">FantasyPros ID</td>
+</tr>
+<tr class="even">
+<td align="left">pos</td>
+<td align="left">character</td>
+<td align="left">Position as tracked by FP</td>
+</tr>
+<tr class="odd">
+<td align="left">team</td>
+<td align="left">character</td>
+<td align="left">NFL team the player plays for</td>
+</tr>
+<tr class="even">
+<td align="left">sportsdata_id</td>
+<td align="left">character</td>
+<td align="left">ID - also known as sportradar_id (they are
+equivalent!)</td>
+</tr>
+<tr class="odd">
+<td align="left">player_filename</td>
+<td align="left">character</td>
+<td align="left">base URL for this player on fantasypros.com</td>
+</tr>
+<tr class="even">
+<td align="left">yahoo_id</td>
+<td align="left">character</td>
+<td align="left">Yahoo ID</td>
+</tr>
+<tr class="odd">
+<td align="left">cbs_id</td>
+<td align="left">character</td>
+<td align="left">CBS ID</td>
+</tr>
+<tr class="even">
+<td align="left">player_image_url</td>
+<td align="left">character</td>
+<td align="left">An image of the player</td>
+</tr>
+<tr class="odd">
+<td align="left">player_square_image_url</td>
+<td align="left">character</td>
+<td align="left">An square image of the player</td>
+</tr>
+<tr class="even">
+<td align="left">mergename</td>
+<td align="left">character</td>
+<td align="left">Player name after being cleaned by dp_cleannames -
+generally strips punctuation and suffixes as well as performing common
+name substitutions.</td>
+</tr>
+<tr class="odd">
+<td align="left">tm</td>
+<td align="left">character</td>
+<td align="left">Team ID as used on MyFantasyLeague.com</td>
+</tr>
+<tr class="even">
+<td align="left">scrape_date</td>
+<td align="left">Date</td>
+<td align="left">Date this dataframe was last updated</td>
+</tr>
+<tr class="odd">
+<td align="left">ecr</td>
+<td align="left">numeric</td>
+<td align="left">Average (mean) expert ranking for this player</td>
+</tr>
+<tr class="even">
+<td align="left">sd</td>
+<td align="left">numeric</td>
+<td align="left">Standard deviation of expert rankings for this
+player</td>
+</tr>
+<tr class="odd">
+<td align="left">best</td>
+<td align="left">numeric</td>
+<td align="left">The highest ranking given for this player by any one
+expert</td>
+</tr>
+<tr class="even">
+<td align="left">worst</td>
+<td align="left">numeric</td>
+<td align="left">The lowest ranking given for this player by any one
+expert</td>
+</tr>
+<tr class="odd">
+<td align="left">player_owned_avg</td>
+<td align="left">numeric</td>
+<td align="left">The average percentage this player is rostered across
+ESPN and Yahoo</td>
+</tr>
+<tr class="even">
+<td align="left">player_owned_espn</td>
+<td align="left">numeric</td>
+<td align="left">The percentage that this player is rostered in ESPN
+leagues</td>
+</tr>
+<tr class="odd">
+<td align="left">player_owned_yahoo</td>
+<td align="left">numeric</td>
+<td align="left">The percentage that this player is rostered in Yahoo
+leagues</td>
+</tr>
+<tr class="even">
+<td align="left">rank_delta</td>
+<td align="left">numeric</td>
+<td align="left">Change in ranks over a recent period</td>
+</tr>
+<tr class="odd">
+<td align="left">bye</td>
+<td align="left">numeric</td>
+<td align="left">NFL bye week</td>
+</tr>
+</tbody>
+</table>      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js" data-external="1"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" data-external="1"></script>
+      <script src="https://r-universe.dev/static/article.js" data-external="1"></script>
+
+      <!-- Mathjax -->
+      <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" data-external="1"></script> -->
+      <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.0.0/tex-mml-chtml.min.js" data-external="1"></script>
+   </body>
+</html>

@@ -1,0 +1,342 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="generator" content="r-universe/pandoc">
+      
+      
+      <title>Data Dictionary - Next Gen Stats</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" data-external="1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" data-external="1">
+      <link rel="stylesheet" href="https://r-universe.dev/static/article-styles.css?nocache=1" data-external="1">
+   </head>
+   <body>
+      <div class="container" id="topcontainer">
+         <script>if (window.self != window.top) try {document.getElementById('topcontainer').className = "container-fluid article-in-iframe"; } catch(e) {}</script>
+
+         <div class="frontmatter">
+         <h1 class="title">Data Dictionary - Next Gen Stats</h1>
+         </div>
+
+         <table>
+<colgroup>
+<col width="11%" />
+<col width="2%" />
+<col width="85%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">field</th>
+<th align="left">data_type</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">season_type</td>
+<td align="left">character</td>
+<td align="left">Either REG or POST</td>
+</tr>
+<tr class="even">
+<td align="left">player_display_name</td>
+<td align="left">character</td>
+<td align="left">Full name of the player</td>
+</tr>
+<tr class="odd">
+<td align="left">player_position</td>
+<td align="left">character</td>
+<td align="left">Position of the player accordinng to NGS</td>
+</tr>
+<tr class="even">
+<td align="left">team_abbr</td>
+<td align="left">character</td>
+<td align="left">Official team abbreveation</td>
+</tr>
+<tr class="odd">
+<td align="left">player_gsis_id</td>
+<td align="left">character</td>
+<td align="left">Unique identifier of the player</td>
+</tr>
+<tr class="even">
+<td align="left">player_first_name</td>
+<td align="left">character</td>
+<td align="left">Player’s first name</td>
+</tr>
+<tr class="odd">
+<td align="left">player_last_name</td>
+<td align="left">character</td>
+<td align="left">Player’s last name</td>
+</tr>
+<tr class="even">
+<td align="left">player_short_name</td>
+<td align="left">character</td>
+<td align="left">Short version of player’s name</td>
+</tr>
+<tr class="odd">
+<td align="left">season</td>
+<td align="left">numeric</td>
+<td align="left">The year of the NFL season. This reperesents the whole
+season, so regular season games that happen in January as well as
+playoff games will occur in the year after this number</td>
+</tr>
+<tr class="even">
+<td align="left">week</td>
+<td align="left">numeric</td>
+<td align="left">The week of the NFL season the game occurs in. Please
+note that the <code>game_type</code> will differ for weeks = 18 because
+of the season expansion in 2021. Please use <code>game_type</code> to
+filter for regular season or postseason</td>
+</tr>
+<tr class="odd">
+<td align="left">avg_time_to_throw</td>
+<td align="left">numeric</td>
+<td align="left">Average time elapsed from the time of snap to throw on
+every pass attempt for a passer (sacks excluded).</td>
+</tr>
+<tr class="even">
+<td align="left">avg_completed_air_yards</td>
+<td align="left">numeric</td>
+<td align="left">Average air yards on completed passes</td>
+</tr>
+<tr class="odd">
+<td align="left">avg_intended_air_yards</td>
+<td align="left">numeric</td>
+<td align="left">Average air yards on all attempted passes</td>
+</tr>
+<tr class="even">
+<td align="left">avg_air_yards_differential</td>
+<td align="left">numeric</td>
+<td align="left">Air Yards Differential is calculated by subtracting the
+passer’s average Intended Air Yards from his average Completed Air
+Yards. This stat indicates if he is on average attempting deep passes
+than he on average completes.</td>
+</tr>
+<tr class="odd">
+<td align="left">aggressiveness</td>
+<td align="left">numeric</td>
+<td align="left">Aggressiveness tracks the amount of passing attempts a
+quarterback makes that are into tight coverage, where there is a
+defender within 1 yard or less of the receiver at the time of completion
+or incompletion. AGG is shown as a % of attempts into tight windows over
+all passing attempts.</td>
+</tr>
+<tr class="even">
+<td align="left">max_completed_air_distance</td>
+<td align="left">numeric</td>
+<td align="left">Air Distance is the amount of yards the ball has
+traveled on a pass, from the point of release to the point of reception
+(as the crow flies). Unlike Air Yards, Air Distance measures the actual
+distance the passer throws the ball.</td>
+</tr>
+<tr class="odd">
+<td align="left">avg_air_yards_to_sticks</td>
+<td align="left">numeric</td>
+<td align="left">Air Yards to the Sticks shows the amount of Air Yards
+ahead or behind the first down marker on all attempts for a passer. The
+metric indicates if the passer is attempting his passes past the 1st
+down marker, or if he is relying on his skill position players to make
+yards after catch.</td>
+</tr>
+<tr class="even">
+<td align="left">attempts</td>
+<td align="left">numeric</td>
+<td align="left">The number of pass attempts</td>
+</tr>
+<tr class="odd">
+<td align="left">pass_yards</td>
+<td align="left">numeric</td>
+<td align="left">Number of yards gained on pass plays</td>
+</tr>
+<tr class="even">
+<td align="left">pass_touchdowns</td>
+<td align="left">numeric</td>
+<td align="left">Number of touchdowns scored on pass plays</td>
+</tr>
+<tr class="odd">
+<td align="left">interceptions</td>
+<td align="left">numeric</td>
+<td align="left">Number of interceptions thrown</td>
+</tr>
+<tr class="even">
+<td align="left">passer_rating</td>
+<td align="left">numeric</td>
+<td align="left">Overall NFL passer rating</td>
+</tr>
+<tr class="odd">
+<td align="left">completions</td>
+<td align="left">numeric</td>
+<td align="left">Number of completed passes</td>
+</tr>
+<tr class="even">
+<td align="left">completion_percentage</td>
+<td align="left">numeric</td>
+<td align="left">Percentage of completed passes</td>
+</tr>
+<tr class="odd">
+<td align="left">expected_completion_percentage</td>
+<td align="left">numeric</td>
+<td align="left">Using a passer’s Completion Probability on every play,
+determine what a passer’s completion percentage is expected to be.</td>
+</tr>
+<tr class="even">
+<td align="left">completion_percentage_above_expectation</td>
+<td align="left">numeric</td>
+<td align="left">A passer’s actual completion percentage compared to
+their Expected Completion Percentage.</td>
+</tr>
+<tr class="odd">
+<td align="left">avg_air_distance</td>
+<td align="left">numeric</td>
+<td align="left">A receiver’s average depth of target</td>
+</tr>
+<tr class="even">
+<td align="left">max_air_distance</td>
+<td align="left">numeric</td>
+<td align="left">A receiver’s maximum depth of target</td>
+</tr>
+<tr class="odd">
+<td align="left">player_jersey_number</td>
+<td align="left">numeric</td>
+<td align="left">Player’s jersey number</td>
+</tr>
+<tr class="even">
+<td align="left">avg_cushion</td>
+<td align="left">numeric</td>
+<td align="left">The distance (in yards) measured between a WR/TE and
+the defender they’re lined up against at the time of snap on all
+targets.</td>
+</tr>
+<tr class="odd">
+<td align="left">avg_separation</td>
+<td align="left">numeric</td>
+<td align="left">The distance (in yards) measured between a WR/TE and
+the nearest defender at the time of catch or incompletion.</td>
+</tr>
+<tr class="even">
+<td align="left">percent_share_of_intended_air_yards</td>
+<td align="left">numeric</td>
+<td align="left">The sum of the receivers total intended air yards (all
+attempts) over the sum of his team’s total intended air yards.
+Represented as a percentage, this statistic represents how much of a
+team’s deep yards does the player account for.</td>
+</tr>
+<tr class="odd">
+<td align="left">receptions</td>
+<td align="left">numeric</td>
+<td align="left">The number of receptions for the receiver</td>
+</tr>
+<tr class="even">
+<td align="left">targets</td>
+<td align="left">numeric</td>
+<td align="left">The numnber of targets for the receiver</td>
+</tr>
+<tr class="odd">
+<td align="left">catch_percentage</td>
+<td align="left">numeric</td>
+<td align="left">Percentage of caught passes relative to targets</td>
+</tr>
+<tr class="even">
+<td align="left">yards</td>
+<td align="left">numeric</td>
+<td align="left">The number of receiving yards</td>
+</tr>
+<tr class="odd">
+<td align="left">rec_touchdowns</td>
+<td align="left">numeric</td>
+<td align="left">The number of touchdown receptions</td>
+</tr>
+<tr class="even">
+<td align="left">avg_yac</td>
+<td align="left">numeric</td>
+<td align="left">Average yards gained after catch by a receiver.</td>
+</tr>
+<tr class="odd">
+<td align="left">avg_expected_yac</td>
+<td align="left">numeric</td>
+<td align="left">Average expected yards after catch, based on numerous
+factors using tracking data such as how open the receiver is, how fast
+they’re traveling, how many defenders/blockers are in space, etc</td>
+</tr>
+<tr class="even">
+<td align="left">avg_yac_above_expectation</td>
+<td align="left">numeric</td>
+<td align="left">A receiver’s YAC compared to their Expected YAC.</td>
+</tr>
+<tr class="odd">
+<td align="left">efficiency</td>
+<td align="left">numeric</td>
+<td align="left">Rushing efficiency is calculated by taking the total
+distance a player traveled on rushing plays as a ball carrier according
+to Next Gen Stats (measured in yards) per rushing yards gained. The
+lower the number, the more of a North/South runner.</td>
+</tr>
+<tr class="even">
+<td align="left">percent_attempts_gte_eight_defenders</td>
+<td align="left">numeric</td>
+<td align="left">On every play, Next Gen Stats calculates how many
+defenders are stacked in the box at snap. Using that logic, DIB%
+calculates how often does a rusher see 8 or more defenders in the box
+against them.</td>
+</tr>
+<tr class="odd">
+<td align="left">avg_time_to_los</td>
+<td align="left">numeric</td>
+<td align="left">Next Gen Stats measures the amount of time a ball
+carrier spends (measured to the 10th of a second) before crossing the
+Line of Scrimmage. TLOS is the average time behind the LOS on all
+rushing plays where the player is the rusher.</td>
+</tr>
+<tr class="even">
+<td align="left">rush_attempts</td>
+<td align="left">numeric</td>
+<td align="left">The number of rushing attempts</td>
+</tr>
+<tr class="odd">
+<td align="left">rush_yards</td>
+<td align="left">numeric</td>
+<td align="left">The number of rushing yards gained</td>
+</tr>
+<tr class="even">
+<td align="left">expected_rush_yards</td>
+<td align="left">numeric</td>
+<td align="left">Expected rushing yards based on Nextgenstats’ Big Data
+Bowl model</td>
+</tr>
+<tr class="odd">
+<td align="left">rush_yards_over_expected</td>
+<td align="left">numeric</td>
+<td align="left">A rusher’s rush yards gained compared to the expected
+rush yards</td>
+</tr>
+<tr class="even">
+<td align="left">avg_rush_yards</td>
+<td align="left">numeric</td>
+<td align="left">AVerage rush yards gained</td>
+</tr>
+<tr class="odd">
+<td align="left">rush_yards_over_expected_per_att</td>
+<td align="left">numeric</td>
+<td align="left">Average rush yards above expectation</td>
+</tr>
+<tr class="even">
+<td align="left">rush_pct_over_expected</td>
+<td align="left">numeric</td>
+<td align="left">Rushing percentage above expectation</td>
+</tr>
+<tr class="odd">
+<td align="left">rush_touchdowns</td>
+<td align="left">numeric</td>
+<td align="left">The number of scored rushing touchdowns</td>
+</tr>
+</tbody>
+</table>      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js" data-external="1"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" data-external="1"></script>
+      <script src="https://r-universe.dev/static/article.js" data-external="1"></script>
+
+      <!-- Mathjax -->
+      <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" data-external="1"></script> -->
+      <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.0.0/tex-mml-chtml.min.js" data-external="1"></script>
+   </body>
+</html>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="generator" content="r-universe/pandoc">
+      
+      
+      <title>Data Dictionary - FF Player IDs</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" data-external="1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" data-external="1">
+      <link rel="stylesheet" href="https://r-universe.dev/static/article-styles.css?nocache=1" data-external="1">
+   </head>
+   <body>
+      <div class="container" id="topcontainer">
+         <script>if (window.self != window.top) try {document.getElementById('topcontainer').className = "container-fluid article-in-iframe"; } catch(e) {}</script>
+
+         <div class="frontmatter">
+         <h1 class="title">Data Dictionary - FF Player IDs</h1>
+         </div>
+
+         <table>
+<colgroup>
+<col width="8%" />
+<col width="5%" />
+<col width="85%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">field</th>
+<th align="left">data_type</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mfl_id</td>
+<td align="left">character</td>
+<td align="left">MyFantasyLeague.com ID - this is the primary key for
+this table and is unique and complete. Usually an integer of 5
+digits.</td>
+</tr>
+<tr class="even">
+<td align="left">sportradar_id</td>
+<td align="left">character</td>
+<td align="left">SportRadar ID - often also called sportsdata_id by
+other services. A UUID.</td>
+</tr>
+<tr class="odd">
+<td align="left">fantasypros_id</td>
+<td align="left">character</td>
+<td align="left">FantasyPros.com ID - usually an integer of 5
+digits.</td>
+</tr>
+<tr class="even">
+<td align="left">gsis_id</td>
+<td align="left">character</td>
+<td align="left">NFL Game Stats and Information Services - usually
+starts with 00- and is followed by a series of integers.</td>
+</tr>
+<tr class="odd">
+<td align="left">pff_id</td>
+<td align="left">character</td>
+<td align="left">Pro Football Focus ID - usually an integer with between
+3 and 6 digits.</td>
+</tr>
+<tr class="even">
+<td align="left">sleeper_id</td>
+<td align="left">character</td>
+<td align="left">Sleeper ID - usually an integer with ~4 digits.</td>
+</tr>
+<tr class="odd">
+<td align="left">nfl_id</td>
+<td align="left">character</td>
+<td align="left">NFL.com ID - usual format fullname/integers</td>
+</tr>
+<tr class="even">
+<td align="left">espn_id</td>
+<td align="left">character</td>
+<td align="left">ESPN ID - usual format is an integer with ~5
+digits</td>
+</tr>
+<tr class="odd">
+<td align="left">yahoo_id</td>
+<td align="left">character</td>
+<td align="left">Yahoo ID - usual format is an integer with ~5
+digits</td>
+</tr>
+<tr class="even">
+<td align="left">fleaflicker_id</td>
+<td align="left">character</td>
+<td align="left">Fleaflicker ID - usual format is an integer with ~4
+digits. Fleaflicker API also has sportradar and that’s generally
+preferred.</td>
+</tr>
+<tr class="odd">
+<td align="left">cbs_id</td>
+<td align="left">character</td>
+<td align="left">CBS ID - usual format is an integer with ~ 7
+digits.</td>
+</tr>
+<tr class="even">
+<td align="left">rotowire_id</td>
+<td align="left">character</td>
+<td align="left">Rotowire ID - usual format is an integer with ~four
+digits. Not to be confused with rotowire_id.</td>
+</tr>
+<tr class="odd">
+<td align="left">rotoworld_id</td>
+<td align="left">character</td>
+<td align="left">Rotoworld ID - usual format is an integer with ~four
+digits. Not to be confused with rotowire_id.</td>
+</tr>
+<tr class="even">
+<td align="left">ktc_id</td>
+<td align="left">character</td>
+<td align="left">KeepTradeCut ID - usual format is an integer with ~four
+digits.</td>
+</tr>
+<tr class="odd">
+<td align="left">pfr_id</td>
+<td align="left">character</td>
+<td align="left">Pro Football Reference ID - usual format is first four
+characters of last name, first two characters of first name, and an
+integer</td>
+</tr>
+<tr class="even">
+<td align="left">cfbref_id</td>
+<td align="left">character</td>
+<td align="left">College Football Reference ID - usual format is
+firstname-lastname-integer</td>
+</tr>
+<tr class="odd">
+<td align="left">stats_id</td>
+<td align="left">character</td>
+<td align="left">Stats ID - usual format is five digit integer</td>
+</tr>
+<tr class="even">
+<td align="left">stats_global_id</td>
+<td align="left">character</td>
+<td align="left">Stats Global ID - usual format is a six digit
+integer</td>
+</tr>
+<tr class="odd">
+<td align="left">fantasy_data_id</td>
+<td align="left">character</td>
+<td align="left">FantasyData ID - usual format five digit integer</td>
+</tr>
+<tr class="even">
+<td align="left">name</td>
+<td align="left">character</td>
+<td align="left">Name, as reported by MFL but reordered into FirstName
+LastName instead of Last, First</td>
+</tr>
+<tr class="odd">
+<td align="left">merge_name</td>
+<td align="left">character</td>
+<td align="left">Name but formatted for name joins via
+ffscrapr::dp_cleannames() - coerced to lowercase, stripped of
+punctuation and suffixes, and common substitutions performed.</td>
+</tr>
+<tr class="even">
+<td align="left">position</td>
+<td align="left">character</td>
+<td align="left">Position as reported by MFL</td>
+</tr>
+<tr class="odd">
+<td align="left">team</td>
+<td align="left">character</td>
+<td align="left">Team as reported by MFL</td>
+</tr>
+<tr class="even">
+<td align="left">birthdate</td>
+<td align="left">date</td>
+<td align="left">Birthdate</td>
+</tr>
+<tr class="odd">
+<td align="left">age</td>
+<td align="left">numeric</td>
+<td align="left">Age as of last pipeline build, rounded to one decimal.
+Pipeline is built on a weekly basis.</td>
+</tr>
+<tr class="even">
+<td align="left">draft_year</td>
+<td align="left">numeric</td>
+<td align="left">Year of draft. Zero if unknown/undrafted.</td>
+</tr>
+<tr class="odd">
+<td align="left">draft_round</td>
+<td align="left">numeric</td>
+<td align="left">Round of draft.</td>
+</tr>
+<tr class="even">
+<td align="left">draft_pick</td>
+<td align="left">numeric</td>
+<td align="left">Draft pick within round, i.e. 32nd pick of second
+round.</td>
+</tr>
+<tr class="odd">
+<td align="left">draft_ovr</td>
+<td align="left">character</td>
+<td align="left">Overall draft pick selection. This can be a little bit
+patchy, since MFL does not report this number.</td>
+</tr>
+<tr class="even">
+<td align="left">twitter_username</td>
+<td align="left">character</td>
+<td align="left">Official twitter handle, if known</td>
+</tr>
+<tr class="odd">
+<td align="left">height</td>
+<td align="left">numeric</td>
+<td align="left">height in inches</td>
+</tr>
+<tr class="even">
+<td align="left">weight</td>
+<td align="left">numeric</td>
+<td align="left">weight in pounds</td>
+</tr>
+<tr class="odd">
+<td align="left">college</td>
+<td align="left">character</td>
+<td align="left">College attended</td>
+</tr>
+<tr class="even">
+<td align="left">db_season</td>
+<td align="left">numeric</td>
+<td align="left">Year of database build. Previous years may also be
+available via dynastyprocess.</td>
+</tr>
+<tr class="odd">
+<td align="left">swish_id</td>
+<td align="left">character</td>
+<td align="left">Player ID for Swish Analytics</td>
+</tr>
+</tbody>
+</table>      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js" data-external="1"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" data-external="1"></script>
+      <script src="https://r-universe.dev/static/article.js" data-external="1"></script>
+
+      <!-- Mathjax -->
+      <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" data-external="1"></script> -->
+      <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.0.0/tex-mml-chtml.min.js" data-external="1"></script>
+   </body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="generator" content="r-universe/pandoc">
+      
+      
+      <title>Using nflreadr in packages</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" data-external="1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" data-external="1">
+      <link rel="stylesheet" href="https://r-universe.dev/static/article-styles.css?nocache=1" data-external="1">
+   </head>
+   <body>
+      <div class="container" id="topcontainer">
+         <script>if (window.self != window.top) try {document.getElementById('topcontainer').className = "container-fluid article-in-iframe"; } catch(e) {}</script>
+
+         <div class="frontmatter">
+         <h1 class="title">Using nflreadr in packages</h1>
+         </div>
+
+                  <div class="row">
+            <div class="col-xl-10"><div id="re-exporting-nflreadr-functions" class="section level2">
+<h2>Re-exporting nflreadr functions</h2>
+<p>You can re-export <code>nflreadr</code> functions in your package by
+using the following roxygen template:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#&#39; @inherit nflreadr::load_nextgen_stats</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Need to add own examples if the function name is different</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&#39; load_ng_stats(2020)</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>load_ng_stats <span class="ot">&lt;-</span> nflreadr<span class="sc">::</span>load_nextgen_stats</span></code></pre></div>
+</div>
+<div id="using-progressr-with-from_url-functions" class="section level2">
+<h2>Using progressr with from_url functions</h2>
+<p>The <code>from_url</code> family of functions can be adapted with the
+<code>progressively()</code> function decorator to signal progress.
+Here’s an example, adapted from the <code>load_rosters()</code> source
+code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>load_rosters <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seasons =</span> <span class="dv">1999</span><span class="sc">:</span><span class="dv">2020</span>){</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="co"># Create a progressor function inside your function that knows how many &quot;steps&quot; there will be</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  p <span class="ot">&lt;-</span> progressr<span class="sc">::</span><span class="fu">progressor</span>(<span class="at">steps =</span> <span class="fu">length</span>(seasons)) </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="co"># Form the URLs to pass into rds_from_url</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  urls <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="st">&quot;https://github.com/nflverse/nflverse-rosters/&quot;</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    <span class="st">&quot;raw/master/data/seasons/roster_&quot;</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    seasons, </span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    <span class="st">&quot;.rds&quot;</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="co"># Use `progressively()` to wrap the existing function rds_from_url and </span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="co"># call the `p()` progressor function as a signal immediately after each iteration</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  </span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  out <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map_dfr</span>(urls, <span class="fu">progressively</span>(rds_from_url,p))</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  </span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>}</span></code></pre></div>
+<p>This will cause p() to execute once for each rds_from_url call,
+effectively “signalling” progress.</p>
+<p>In order to receive progress updates, the user must wrap the function
+(load_rosters, in this case) with
+<code>progressr::with_progress()</code> as shown here:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>progressr<span class="sc">::</span><span class="fu">with_progress</span>(<span class="fu">load_rosters</span>(<span class="dv">2010</span><span class="sc">:</span><span class="dv">2020</span>))</span></code></pre></div>
+<p>For more information, please see the <a href="https://progressr.futureverse.org">progressr</a>
+documentation.</p>
+</div></div>
+            <div class="d-none d-xl-block col-xl-2 bd-toc">
+               <ul class="section-nav">
+                  <li class="toc-entry"><ul>
+<li><a href="#re-exporting-nflreadr-functions" id="toc-re-exporting-nflreadr-functions">Re-exporting nflreadr
+functions</a></li>
+<li><a href="#using-progressr-with-from_url-functions" id="toc-using-progressr-with-from_url-functions">Using progressr with
+from_url functions</a></li>
+</ul></li>
+               </ul>
+            </div>
+         </div>
+               </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js" data-external="1"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" data-external="1"></script>
+      <script src="https://r-universe.dev/static/article.js" data-external="1"></script>
+
+      <!-- Mathjax -->
+      <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" data-external="1"></script> -->
+      <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.0.0/tex-mml-chtml.min.js" data-external="1"></script>
+   </body>
+</html>

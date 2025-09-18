@@ -1,0 +1,8 @@
+add_2pt_probs           Get 2pt decision probabilities
+add_4th_probs           Get 4th down decision probabilities
+get_4th_plays           Get 4th down plays from a game
+load_4th_pbp            Load calculated 4th down probabilities from
+                        'nflfastR' data
+make_2pt_table_data     Get 2pt decision probabilities
+make_table_data         Get 4th down decision probabilities
+nfl4th_clear_cache      Reset nfl4th Package Cache

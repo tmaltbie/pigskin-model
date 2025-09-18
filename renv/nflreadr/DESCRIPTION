@@ -12,7 +12,7 @@ Authors@R: c(
     person("Pranav", "Rajaram", , "pranavrajaram@gmail.com", role = "ctb")
   )
 Description: A minimal package for downloading data from 'GitHub'
-    repositories of the 'nflverse' project.
+        repositories of the 'nflverse' project.
 License: MIT + file LICENSE
 URL: https://nflreadr.nflverse.com,
         https://github.com/nflverse/nflreadr
@@ -31,18 +31,14 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-RemoteType: github
-RemoteHost: api.github.com
-RemoteRepo: nflreadr
-RemoteUsername: nflverse
+Config/pak/sysreqs: libssl-dev
+Repository: https://nflverse.r-universe.dev
+Date/Publication: 2025-09-12 13:25:07 UTC
+RemoteUrl: https://github.com/nflverse/nflreadr
 RemoteRef: HEAD
 RemoteSha: 009804101463eb6685f05c41a0823623ea7a1462
-GithubRepo: nflreadr
-GithubUsername: nflverse
-GithubRef: HEAD
-GithubSHA1: 009804101463eb6685f05c41a0823623ea7a1462
 NeedsCompilation: no
-Packaged: 2025-09-16 07:26:02 UTC; trevor
+Packaged: 2025-09-12 13:34:52 UTC; root
 Author: Tan Ho [aut, cre, cph] (ORCID: <https://orcid.org/0000-0001-8388-5155>),
   Sebastian Carl [aut],
   John Edwards [ctb],
@@ -51,4 +47,4 @@ Author: Tan Ho [aut, cre, cph] (ORCID: <https://orcid.org/0000-0001-8388-5155>),
   Lee Sharpe [ctb],
   Pranav Rajaram [ctb]
 Maintainer: Tan Ho <tan@tanho.ca>
-Built: R 4.5.1; ; 2025-09-16 07:26:02 UTC; unix
+Built: R 4.5.1; ; 2025-09-18 16:48:00 UTC; unix
