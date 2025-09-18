@@ -22,6 +22,58 @@
 **Week 2 2025**: 68.8% ATS Success (11/16 games)  
 **Prediction Accuracy**: 4.4 point average error (EPA model) vs 9.89 points (basic model)
 
+## 🤖 Self-Learning System
+
+### Architecture Overview
+The Pigskin Model now includes a **self-improving prediction system** that learns from its own performance, continuously refining predictions through automated analysis of mistakes and successes.
+
+**Core Components:**
+- **📊 Production Database**: SQLite database tracking all predictions vs actual results
+- **🧠 Learning Loop**: Automated analysis of prediction errors and systematic biases  
+- **📈 Performance Analytics**: Real-time monitoring of ATS accuracy, ROI, and calibration
+- **⚖️ Dynamic Ensemble**: Model weights adjust based on recent performance
+- **🎯 Meta-Cognition**: Self-evaluation, competitive alternatives, iterative refinement
+
+### Self-Learning Features
+**Self-Evaluation:**
+- Model confidence calibration (predicted vs actual accuracy)
+- Performance degradation detection and alerts
+- Feature importance drift monitoring
+- Systematic bias identification and correction
+
+**Competitive Alternatives:**
+- Multiple models competing (EPA, XGBoost, Random Forest, Neural Networks)
+- Dynamic ensemble weighting based on recent performance  
+- A/B testing with statistical significance testing
+- Alternative feature sets and preprocessing pipelines
+
+**Iterative Refinement:**
+- Weekly model retraining with new game data
+- Monthly deep learning cycles with architecture updates
+- Error pattern recognition and corrective feature engineering
+- Automated hyperparameter optimization
+
+### Machine Learning Architecture
+**Ensemble Prediction Weights:**
+- **30%** - Proven EPA-based system
+- **35%** - ML ensemble (XGBoost, Random Forest, Elastic Net, SVM)
+- **25%** - Advanced factors (injuries, weather, coaching, rest)
+- **10%** - Market efficiency adjustment
+
+### Advanced nflfastR Features
+✅ **CPOE** (Completion Percentage Over Expected)  
+✅ **XYAC_EPA** (Expected Yards After Catch EPA)  
+✅ **Win Probability** metrics and WPA  
+✅ **Situational EPA** (down, distance, field position)  
+✅ **Drive success rates** and red zone efficiency  
+✅ **Rolling averages** and trend analysis  
+
+### Expected Improvements
+- **Reduce prediction error** from 4.4 points to ~3.5-4.0 points
+- **Improve directional accuracy** vs Vegas by 5-8%
+- **Increase betting ROI** through better game selection
+- **Maintain conservative risk** profile while adding ML sophistication
+
 ---
 
 ## 🚀 Getting Started
@@ -78,13 +130,77 @@ source('epa_prediction_system.R')
 test_epa_system()
 ```
 
+**Enhanced ML System:**
+```r
+# Load the enhanced ML system with nflfastR advanced metrics
+source('enhanced_ml_system.R')
+
+# Quick start with ML enhancements
+quick_start_example()
+
+# Train complete ML system (30-60 minutes)
+train_complete_system()
+
+# Make enhanced predictions with ensemble
+make_enhanced_prediction(
+  home_team = "KC", 
+  away_team = "BUF", 
+  vegas_spread = -3.5
+)
+```
+
+**Self-Learning System:**
+```r
+# Initialize the prediction tracking database
+source('learning_system/prediction_database.R')
+db <- initialize_prediction_db()
+
+# Store a prediction for learning
+prediction_id <- insert_prediction(
+  game_id = "2025_03_KC_BUF",
+  home_team = "KC",
+  away_team = "BUF", 
+  predictions = list(
+    predicted_margin = -3.2,
+    predicted_total = 52.1,
+    home_win_prob = 0.65,
+    confidence = 0.78
+  ),
+  model_version = "v2.0_learning"
+)
+
+# Update with actual results after the game
+update_prediction_results(
+  game_id = "2025_03_KC_BUF",
+  actual_home_score = 28,
+  actual_away_score = 21
+)
+
+# Analyze performance
+performance <- calculate_model_performance(
+  start_date = "2025-09-01", 
+  end_date = "2025-09-30"
+)
+
+# Get database statistics
+stats <- get_database_stats()
+```
+
 ### Key Dependencies
 
+**Core Packages:**
 - `nflreadr` - NFL data access
 - `dplyr` - Data manipulation  
 - `httr` - API requests
 - `jsonlite` - JSON parsing
 - `renv` - Package management
+
+**ML Enhancement Packages:**
+- `xgboost` - Gradient boosting
+- `randomForest` - Random forest models
+- `glmnet` - Elastic net regression
+- `e1071` - Support vector machines
+- `caret` - Model training framework
 
 ---
 
